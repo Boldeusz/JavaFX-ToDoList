@@ -7,10 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
+import sample.datamodel.ToDoData;
 import sample.datamodel.ToDoItem;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +45,16 @@ public class Controller {
         toDoItems.add(item4);
         toDoItems.add(item5);
 
+        ToDoData.getInstance().setToDoItems(toDoItems);
+
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {
             @Override
             public void changed(ObservableValue<? extends ToDoItem> observableValue, ToDoItem oldValue, ToDoItem newValue) {
                 if (newValue != null){
                     ToDoItem item = todoListView.getSelectionModel().getSelectedItem();
                     itemDetailsTextArea.setText(item.getDetails());
+                    DateTimeFormatter df = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+                    deadLineLabel.setText(df.format(item.getDeadLine()));
                 }
             }
         });
