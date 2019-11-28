@@ -3,18 +3,20 @@ package sample;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import sample.datamodel.ToDoData;
 import sample.datamodel.ToDoItem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Controller {
 
@@ -25,6 +27,9 @@ public class Controller {
     private TextArea itemDetailsTextArea;
     @FXML
     private Label deadLineLabel;
+    @FXML
+    private BorderPane mainBorderPane;
+
 
     public void initialize() {
 //        ToDoItem item1 = new ToDoItem("Mail birthday card", "Buy a 30th birthday card for John",
@@ -65,6 +70,33 @@ public class Controller {
         todoListView.getSelectionModel().selectFirst();
 
     }
+    @FXML
+    public void showNewItemDialog() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+        try{
+            Parent root = FXMLLoader.load(getClass().getResource("todoItemDialog.fxml"));
+            dialog.getDialogPane().setContent(root);
+
+        }catch (IOException e){
+            System.out.println("Could not load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("OK pressed");
+        }else {
+            System.out.println("Cancel pressed");
+        }
+
+
+    }
+
+
     @FXML
     public void handleClickView(){
 
