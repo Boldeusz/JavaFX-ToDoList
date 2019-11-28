@@ -27,25 +27,25 @@ public class Controller {
     private Label deadLineLabel;
 
     public void initialize() {
-        ToDoItem item1 = new ToDoItem("Mail birthday card", "Buy a 30th birthday card for John",
-                LocalDate.of(2019, Month.NOVEMBER,27));
-        ToDoItem item2 = new ToDoItem("Doctor's Appointment", "See Dr. Smith at 123 Main Street. Bring paperwork",
-                LocalDate.of(2019, Month.DECEMBER,15));
-        ToDoItem item3 = new ToDoItem("Finish design proposal for client", "I promised Mike I'd email website mockups up Friday 22nd November",
-                LocalDate.of(2019, Month.NOVEMBER,22));
-        ToDoItem item4 = new ToDoItem("Pick up Doug at the train station", "Doug's arriving on December 5 on the 5:00 train",
-                LocalDate.of(2019, Month.DECEMBER,5));
-        ToDoItem item5 = new ToDoItem("Pick up dry cleaning", "The clothes should be ready by Wednesday",
-                LocalDate.of(2019, Month.NOVEMBER,29));
-
-        toDoItems = new ArrayList<ToDoItem>();
-        toDoItems.add(item1);
-        toDoItems.add(item2);
-        toDoItems.add(item3);
-        toDoItems.add(item4);
-        toDoItems.add(item5);
-
-        ToDoData.getInstance().setToDoItems(toDoItems);
+//        ToDoItem item1 = new ToDoItem("Mail birthday card", "Buy a 30th birthday card for John",
+//                LocalDate.of(2019, Month.NOVEMBER,27));
+//        ToDoItem item2 = new ToDoItem("Doctor's Appointment", "See Dr. Smith at 123 Main Street. Bring paperwork",
+//                LocalDate.of(2019, Month.DECEMBER,15));
+//        ToDoItem item3 = new ToDoItem("Finish design proposal for client", "I promised Mike I'd email website mockups up Friday 22nd November",
+//                LocalDate.of(2019, Month.NOVEMBER,22));
+//        ToDoItem item4 = new ToDoItem("Pick up Doug at the train station", "Doug's arriving on December 5 on the 5:00 train",
+//                LocalDate.of(2019, Month.DECEMBER,5));
+//        ToDoItem item5 = new ToDoItem("Pick up dry cleaning", "The clothes should be ready by Wednesday",
+//                LocalDate.of(2019, Month.NOVEMBER,29));
+//
+//        toDoItems = new ArrayList<ToDoItem>();
+//        toDoItems.add(item1);
+//        toDoItems.add(item2);
+//        toDoItems.add(item3);
+//        toDoItems.add(item4);
+//        toDoItems.add(item5);
+//
+//        ToDoData.getInstance().setToDoItems(toDoItems);
 
         todoListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ToDoItem>() {
             @Override
@@ -59,7 +59,8 @@ public class Controller {
             }
         });
 
-        todoListView.getItems().setAll(toDoItems);
+//        todoListView.getItems().setAll(toDoItems);
+        todoListView.getItems().setAll(ToDoData.getInstance().getToDoItems());
         todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         todoListView.getSelectionModel().selectFirst();
 
